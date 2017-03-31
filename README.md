@@ -2,7 +2,7 @@
 
 - Clone
 ```
-git@git.ubnt.com.cn:ubnt-dev/docker-php-nginx-mysql-pma.git
+https://github.com/Nesoi/docker-lnmp.git
 ```
 
 - CD
