@@ -1,0 +1,27 @@
+mysqldb:
+  image: mariadb
+  volumes:
+    - ./db/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: password
+    MYSQL_ROOT_HOST: mysql
+
+nginx-php-fpm:
+  image: richarvey/nginx-php-fpm
+  ports:
+    - "81:80"
+    - "444:443"
+  volumes:
+    - ./www:/var/www/html
+    - ./conf/nginx:/etc/nginx/sites-available
+    - ./conf/ssl:/etc/nginx/ssl
+  links:
+    - mysqldb:mysql
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  ports:
+    - "8089:80"
+  links:
+    - mysqldb:mysql
+  environment:
+    PMA_HOST: mysql
